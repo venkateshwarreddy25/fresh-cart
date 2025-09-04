@@ -1,0 +1,23 @@
+
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h1 class="card-title"><%= product.name %></h1>
+    <ul class="list-group mb-3">
+      <li class="list-group-item">Price: $<%= product.price.toFixed(2) %></li>
+      <li class="list-group-item">
+        Category: 
+        <a href="/products?category=<%= product.category %>" class="badge bg-info text-dark">
+          <%= product.category %>
+        </a>
+      </li>
+    </ul>
+
+    <a href="/products" class="btn btn-secondary">Back</a>
+    <a href="/products/<%=product._id%>/edit" class="btn btn-warning">Edit</a>
+    
+    <form action="/products/<%= product._id %>?_method=DELETE" method="post" class="d-inline">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
