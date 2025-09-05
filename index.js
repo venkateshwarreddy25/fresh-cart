@@ -6,11 +6,12 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const Product = require('./models/product');
 const expressLayouts = require('express-ejs-layouts');
+require("dotenv").config();
 app.use(expressLayouts);
 
 
 
-mongoose.connect('mongodb://localhost:27017/approduct')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log(' Connected to MongoDB'))
   .catch(err => console.error(' Connection error:', err));
 
@@ -25,6 +26,13 @@ app.set('view engine', 'ejs');
 
 const categories = ['fruit', 'vegetable', 'dairy'];
 
+app.get('/',async(req,res)=>{
+  try{
+    res.redirect('products')
+  }catch(e){
+    console.log(e);
+  }
+})
 
 app.get('/products', async (req, res) => {
   const { category } = req.query;
